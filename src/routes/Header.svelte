@@ -3,11 +3,9 @@
 	import logo from '../lib/images/logo.svg'
 	import { page } from '$app/stores';
 
-//export const prerender = false;
-
 </script>
 
-<Navbar>
+<Navbar class="font-bold">
 	<NavBrand href="/">
 	  <img src={logo} class="me-3 h-6 sm:h-9" alt="Learn2TradePro Logo" />
 	  <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Learn 2 Trade Pro</span>

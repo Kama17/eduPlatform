@@ -1,13 +1,17 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { Button } from "flowbite-svelte";
+	import {Alert, Spinner, Button } from "flowbite-svelte";
 
 let errorMessage = '';
-
+    let isLoading = false
+    let isError: Boolean = false
 async function login(event: Event) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const data = new FormData(form);
+    isLoading = true;
+    errorMessage = "";
+
 
     try {
         const response = await fetch('/login', {
@@ -19,13 +23,18 @@ async function login(event: Event) {
             await goto('/student')
 
         } else if (response.status === 403) {
+            isLoading = false;
             errorMessage = 'Access denied. Please check your credentials.';
         } else if (response.status === 400) {
+            isLoading = false;
             errorMessage = 'Missing email or password.';
         } else {
+            isLoading = false;
             errorMessage = 'An unexpected error occurred. Please try again later.';
         }
     } catch (error) {
+        isError = true
+        isLoading = false;
         console.error('Error during login:', error);
         errorMessage = 'Unable to connect to the server.';
     }
@@ -47,7 +56,21 @@ async function login(event: Event) {
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                         <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
-                    <Button type="submit" class="btn bg-blue-400 w-full rounded border">Login</Button>
+                    <div class="grid justify-items-stretch gap-2">
+                        <Button type="submit" color="dark" class="bg-blue-400">
+                            {#if isLoading}
+                            <Spinner class="me-3" size="4" />
+                            Logging...
+                            {:else}
+                                Login
+                            {/if}
+                        </Button>
+                    </div>
+                    {#if errorMessage}
+                    <Alert color="yellow">
+                        {errorMessage}
+                    </Alert>
+                    {/if}
                 </form>
             </div>
         </div>

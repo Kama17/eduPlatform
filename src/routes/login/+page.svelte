@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Login</title>
+	<title>Student</title>
 	<meta name="description" content="Login page"/>
 </svelte:head>
 

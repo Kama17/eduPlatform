@@ -14,10 +14,11 @@
 		{@render children()}
 	</main>
 
-
-	<Footer/>
-
 </div>
+
+<footer>
+	<Footer/>
+</footer>
 
 <style>
 
