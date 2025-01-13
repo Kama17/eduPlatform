@@ -1,18 +1,79 @@
 <script lang="ts">
 
+import { stepSlug } from '$lib/stores';
+	import { CodeBranchOutline } from 'flowbite-svelte-icons';
+
+let contentText: string;
+let title: string;
+let videoLink: string = '';
+
+ // Fetch content based on the slug
+ const fetchContent = async (slug: string) => {
+    try {
+
+        // Check if content is already in localStorage
+    const cachedContent = localStorage.getItem(slug);
+    if (cachedContent) {
+      // If cached, parse and return it
+
+      //console.log("cachedContent", cachedContent)
+      //let cached =  JSON.parse(cachedContent);
+      //title = cached.title
+      //contentText = cached.content
+    }
+
+      const response = await fetch(`/student/content/${slug}`, { method: 'GET' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch content');
+      }
+      else{console.log("FEATVHEED")}
+
+      const data = await response.json();
+      contentText = data.content.content; // Set the fetched text
+      title = data.content.title;
+
+      // Cache the fetched content in localStorage
+   // localStorage.setItem(slug, JSON.stringify({
+     // slug: data.content.slug,
+     // title: title,
+      //content: contentText
+    //}));
+
+    } catch (error) {
+      console.error('Error fetching content:', error);
+      contentText = ''; // Set empty text in case of error
+    }
+  };
+
+  // Reactive block to fetch content when slug changes
+  $: {
+    if ($stepSlug) {
+      fetchContent($stepSlug); // Fetch content whenever the slug changes
+    }
+  }
 
 </script>
 
-<div class="pt-5 w-screen">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+   <div class="p-5 w-full h-full">
+        <div class="rounded-t bg-gray-50">
+            <h1 style="font-size: 2.5rem; color: black; text-align: center; transition: opacity 0.3s ease;">
+            {title}
+            </h1>
+        </div>
+    <div class=" p-5 flex items-center justify-center w-full h-full bg-gray-200 rounded-b">
+        <!-- svelte-ignore a11y_media_has_caption -->
+        {#if videoLink}
+            <video controls class="">
+                <source src={videoLink} type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        {/if}
 
-          <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-             <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-             </p>
-          </div>
+        {#if contentText}
+            <div  class="custom-scrollbar" style="max-height: 100vh; overflow-y: auto;">
+                {@html contentText}
+            </div>
+        {/if}
+       </div>
+   </div>
 
-    </div>
- </div>

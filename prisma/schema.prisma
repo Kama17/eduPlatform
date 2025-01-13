@@ -16,19 +16,39 @@ model User {
   createdAT DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email String @unique
-  password String
-
-  loginCount  Int      @default(0)     // Tracks the number of successful logins
+  email       String    @unique
+  password    String
+  active      String    @default("no")
+  loginCount  Int       @default(0)     // Tracks the number of successful logins
   lastLogin   DateTime? // Tracks the last successful login timestamp
 
+  userDetails userDetails[]
   Session Session[]
+   telegramGroups telegramGroups[]
 }
 
 model Session {
-  id          Int      @id @default(autoincrement())
-  sessionToken String   @unique
-  userId      Int
-  user        User      @relation(fields: [userId], references: [id])
+  id            Int      @id @default(autoincrement())
+  sessionToken  String   @unique
+  userId        Int
+  user          User      @relation(fields: [userId], references: [id])
   expiresAt   DateTime
+}
+
+model userDetails {
+id              Int      @id @default(autoincrement())
+firstName       String?
+lastName        String?
+autoShipDate    DateTime?
+telegramName    String?
+userId          Int
+user            User        @relation(fields: [userId], references: [id])
+}
+
+model telegramGroups {
+  id        Int      @id @default(autoincrement())
+  groupId   String   @unique
+  groupName String?
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }

@@ -1,5 +1,4 @@
 import { type RequestHandler } from "@sveltejs/kit";
-//export const prerender = false;
 import db from '$lib/database';
 
 export const POST: RequestHandler = async ({request, cookies} ) => {
@@ -12,7 +11,7 @@ export const POST: RequestHandler = async ({request, cookies} ) => {
             where: { email: email as string },
         });
 
-        if (user && user.password === password) {
+        if (user && user.password === password && user.active === "yes") {
             const sessionToken = crypto.randomUUID()
             const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24)
 

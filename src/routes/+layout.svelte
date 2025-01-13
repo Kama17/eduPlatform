@@ -7,7 +7,7 @@
 
 </script>
 
-<div class="app">
+<div class="app flex flex-col min-h-screen">
 	<Header/>
 
 	<main>
@@ -15,12 +15,8 @@
 	</main>
 
 </div>
-
+<!--
 <footer>
 	<Footer/>
 </footer>
-
-<style>
-
-
-</style>
+-->

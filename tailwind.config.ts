@@ -28,7 +28,7 @@ export default {
 			}
 		  }
 		},
-
+		darkMode: 'class',
 	plugins: [typography, containerQueries, flowbite ]
 } as Config;
 

@@ -3,9 +3,11 @@
 	import {Alert, Spinner, Button } from "flowbite-svelte";
 
 let errorMessage = '';
-    let isLoading = false
-    let isError: Boolean = false
+let isLoading = false
+let isError: Boolean = false
+
 async function login(event: Event) {
+
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const data = new FormData(form);
@@ -57,7 +59,7 @@ async function login(event: Event) {
                         <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
                     <div class="grid justify-items-stretch gap-2">
-                        <Button type="submit" color="dark" class="bg-blue-400">
+                        <Button type="submit">
                             {#if isLoading}
                             <Spinner class="me-3" size="4" />
                             Logging...
