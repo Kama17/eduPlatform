@@ -20,6 +20,7 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@types/eslint": "^9.6.0",
+		"@types/jsonwebtoken": "^9.0.7",
 		"autoprefixer": "^10.4.20",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -44,6 +45,8 @@
 		"@supabase/supabase-js": "^2.46.1",
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@tailwindcss/typography": "^0.5.15",
-		"flowbite": "^2.5.2"
+		"flowbite": "^2.5.2",
+		"flowbite-svelte-blocks": "^1.1.4",
+		"jsonwebtoken": "^9.0.2"
 	}
 }

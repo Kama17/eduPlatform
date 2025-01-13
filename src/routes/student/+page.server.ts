@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-//export const prerender = false; // Disable prerendering for login
+export const prerender = false; // Disable prerendering for student
 export const load = async ({ locals ,  setHeaders}) => {
     if (!locals.user) {
         throw redirect(303, '/login'); // Redirect to /login if user is not authenticated
