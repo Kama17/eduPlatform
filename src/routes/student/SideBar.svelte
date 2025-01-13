@@ -50,14 +50,14 @@
     class="flex items-center justify-center"
     contentClass="bg-gray-50 rounded-lg dark:bg-gray-800 mt-1">
 
-    <TabItem title="Platforma" on:click={() => (mobilePlatform = !mobilePlatform, progressBarShow = false)}>
+    <TabItem title="Platforma" on:click={() => (mobilePlatform = true, progressBarShow = false)}>
 
       <div slot="title" class="flex items-center gap-2">
         <UserSolid size="md" />
         Platforma
       </div>
     </TabItem>
-    <TabItem title="Edukacja" on:click={() => (mobilePlatform = !mobilePlatform, progressBarShow = false)}>
+    <TabItem title="Edukacja" on:click={() => (mobilePlatform = false, progressBarShow = false)}>
       <div slot="title" class="flex items-center gap-2">
         <ClipboardSolid size="md" />
         Edukacja
