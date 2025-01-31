@@ -3,12 +3,11 @@
 @import 'tailwindcss/utilities';
 @import '@fontsource/fira-mono';
 
-
 body, .custom-scrollbar {
-
 	--sb-size: 4px;
 	--sb-track-color: bg-gray-800;
 	--sb-thumb-color: #76758e;
+	font-family: Montserrat, sans-serif;
 }
 
 
@@ -38,9 +37,8 @@ body, .custom-scrollbar {
 	}
   }
 
-
-
   .no-rounded {
 	border-radius: 0 !important;
 
   }
+

@@ -23,19 +23,29 @@ export const POST: RequestHandler = async ({ request }) => {
             where: { email },
         });
 
-        if (user) {
-            return new Response('User already exists', { status: 403 });
+        if (user && user.active === "yes") {
+            return new Response('User already active. Please log in', { status: 403 });
         }
 
-
+        if( user && user.active === "pending") {
+            await db.user.update({
+                where: {
+                  email: email, // Match the record by email
+                },
+                data: {
+                    password: password,
+                    active: 'yes', // Update the 'active' field
+                },
+              });
+        }
         // Create a new user
-        await db.user.create({
-            data: {
-                email: email,
-                password: password,
-                active: 'yes',
-            },
-        });
+        //await db.user.create({
+            //data: {
+               // email: email,
+               // password: password,
+               // active: 'yes',
+           // },
+        //});
 
         const userActivated = await db.user.findUnique({
             where: {email : email}

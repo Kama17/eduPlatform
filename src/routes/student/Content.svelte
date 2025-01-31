@@ -1,11 +1,12 @@
 <script lang="ts">
 
 import { stepSlug } from '$lib/stores';
-	import { CodeBranchOutline } from 'flowbite-svelte-icons';
+import { CodeBranchOutline } from 'flowbite-svelte-icons';
+import { Video , Heading, P } from 'flowbite-svelte'
 
 let contentText: string;
 let title: string;
-let videoLink: string = '';
+let type: string;
 
  // Fetch content based on the slug
  const fetchContent = async (slug: string) => {
@@ -26,11 +27,14 @@ let videoLink: string = '';
       if (!response.ok) {
         throw new Error('Failed to fetch content');
       }
-      else{console.log("FEATVHEED")}
+      else{
+        console.log("FEATVHEED")
+      }
 
       const data = await response.json();
       contentText = data.content.content; // Set the fetched text
       title = data.content.title;
+      type = data.content.type
 
       // Cache the fetched content in localStorage
    // localStorage.setItem(slug, JSON.stringify({
@@ -53,27 +57,16 @@ let videoLink: string = '';
   }
 
 </script>
+<div class="p-5 w-full dark:bg-gray-800 flex justify-center items-center"  style=" min-height: 100vh;" >
 
-   <div class="p-5 w-full h-full">
-        <div class="rounded-t bg-gray-50">
-            <h1 style="font-size: 2.5rem; color: black; text-align: center; transition: opacity 0.3s ease;">
-            {title}
-            </h1>
-        </div>
-    <div class=" p-5 flex items-center justify-center w-full h-full bg-gray-200 rounded-b">
-        <!-- svelte-ignore a11y_media_has_caption -->
-        {#if videoLink}
-            <video controls class="">
-                <source src={videoLink} type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        {#if type === "video"}
+            <Video  class="rounded w-3/4 h-auto"  controls src={contentText} trackSrc={contentText} />
         {/if}
 
-        {#if contentText}
-            <div  class="custom-scrollbar" style="max-height: 100vh; overflow-y: auto;">
+        {#if type === "text"}
+            <P  class="custom-scrollbar text-sm" style="max-height: 100vh; overflow-y: auto;">
                 {@html contentText}
-            </div>
+            </P>
         {/if}
-       </div>
-   </div>
 
+  </div>

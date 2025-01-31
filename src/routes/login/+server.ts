@@ -43,6 +43,14 @@ export const POST: RequestHandler = async ({request, cookies} ) => {
             maxAge: 60 * 60 * 24, // 1 day
         });
 
+        cookies.set('user', user.id.toString() , {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
+            path: '/',
+            maxAge: 60 * 60 * 24, // 1 day
+        });
+
             return new Response("OK");
         }
 

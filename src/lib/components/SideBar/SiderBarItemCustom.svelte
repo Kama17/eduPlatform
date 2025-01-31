@@ -1,4 +1,8 @@
 <script lang="ts">
+
+import { onMount } from 'svelte';
+import { writable } from 'svelte/store';
+
 import {
     SidebarGroup,
     SidebarDropdownItem,
@@ -9,12 +13,15 @@ import {
   import {
     ChevronDoubleUpOutline,
     ChevronDoubleDownOutline,
+    ChevronUpOutline,ChevronDownOutline,
     BookOpenSolid} from 'flowbite-svelte-icons';
 
-  import { stepSlug } from '$lib/stores'; // Import the store
+  import { stepSlug, userCurrentProgress } from '$lib/stores'; // Import the store
   import {config} from '$lib/components/SideBar/config'
 
   let activeItemSlug: string = ''
+  let userProgress: number = 0
+  let userProgressTotal: number = 0
 //
   const selectItem = (itemId: string) => {
     activeItemSlug = createSlug(itemId)
@@ -25,41 +32,96 @@ import {
   function createSlug(text: string): string {
   return text
     .toLowerCase()                           // Convert to lowercase
-    .replace(/\s+/g, '-')                     // Replace spaces with hyphens
+    .replace(/\s+/g, '')                     // Replace spaces with hyphens
     //.replace(/[^\w\-]+/g, '')                 // Remove non-alphanumeric characters except hyphens
     .replace(/--+/g, '-')                     // Replace multiple hyphens with a single hyphen
     .replace(/^-+/, '')                       // Remove leading hyphens
     .replace(/-+$/, '');                      // Remove trailing hyphens
 }
 
+interface Progress {
+  itemId: string;
+  isChecked: boolean;
+}
+
+let checkboxes = writable<{ [key: string]: boolean }>({});
+
+  // Fetch initial checkbox states
+  onMount(async () => {
+    const response = await fetch('/student');
+    const data: Progress[] = await response.json();
+
+    const formattedData = data.reduce((acc: { [key: string]: boolean }, { itemId, isChecked }) => {
+    acc[itemId] = isChecked; // Map itemId to isChecked
+    if(isChecked)
+    userProgress++
+    return acc;
+  }, {});
+
+  // Set the formatted data to the checkboxes store
+  checkboxes.set(formattedData);
+  $userCurrentProgress = Math.ceil( (userProgress/6) * 100)
+  console.log(userProgress)
+
+
+  });
+
+  // Update checkbox state in the database
+  async function toggleCheckbox(itemId: string, isChecked: boolean) {
+    await fetch('/student', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ itemId, isChecked }),
+    });
+    // Update the store
+    if(isChecked)
+      userProgress++
+    else
+      userProgress--
+
+      $userCurrentProgress = Math.ceil( (userProgress/6) * 100)
+
+  }
+
+
+
+  console.log( "PROGRESS:"  ,$userCurrentProgress)
 </script>
 
 {#each Object.entries(config) as [level, levelDetails]}
 
 <SidebarGroup class={levelDetails.Config.groupBorderClass}>
-  <SidebarDropdownWrapper label={level} btnClass={levelDetails.Config.buttonClass}>
+  <SidebarDropdownWrapper label={level} btnClass=" dark:text-gray-400 {levelDetails.Config.buttonClass}">
     <svelte:fragment slot="icon">
       <BookOpenSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
     </svelte:fragment>
     <svelte:fragment slot="arrowup">
-      <ChevronDoubleUpOutline class="w-6 h-6" />
+      <ChevronDoubleUpOutline />
     </svelte:fragment>
     <svelte:fragment slot="arrowdown">
-      <ChevronDoubleDownOutline class="w-6 h-6" />
+      <ChevronDoubleDownOutline />
     </svelte:fragment>
   <SidebarGroup/>
 
 {#each Object.entries(levelDetails.topics) as [topicName, topicsDetails]}
   <SidebarGroup border class={topicsDetails.Config.topicBorderClass}>
-    <SidebarDropdownWrapper label={topicName}>
+    <SidebarDropdownWrapper label={topicName} class="dark:text-gray-400 text-sm {topicsDetails.Config.buttonClass}">
+      <svelte:fragment slot="arrowup">
+        <ChevronUpOutline />
+      </svelte:fragment>
+      <svelte:fragment slot="arrowdown">
+        <ChevronDownOutline />
+      </svelte:fragment>
   {#each topicsDetails.steps as { steps }}
     {#each steps as step}
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-between space-x-1">
+        <li class="ps-1 w-full">
         <SidebarDropdownItem
           on:click={() => selectItem(level + topicName + step)}
-          class={activeItemSlug === createSlug(level + topicName + step) ? topicsDetails.Config.buttonClass : ""}
+          class="{`dark:text-gray-400 text-sm ${activeItemSlug === createSlug(level + topicName + step) ? topicsDetails.Config.buttonClassOnClick : ''}`}"
           label={step}/>
-        <Checkbox color={levelDetails.Config.checkBoxColor}/>
+        </li>
+          <Checkbox id={createSlug(level + topicName + step)} checked={$checkboxes[createSlug(level + topicName + step)]} on:change={(e) => toggleCheckbox(createSlug(level + topicName + step), (e.target as HTMLInputElement).checked)} class={levelDetails.Config.checkBoxColor}/>
       </div>
     {/each}
   {/each}
@@ -69,4 +131,3 @@ import {
 </SidebarDropdownWrapper>
 </SidebarGroup>
 {/each}
-

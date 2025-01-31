@@ -15,8 +15,7 @@
 	</main>
 
 </div>
-<!--
-<footer>
+
+
 	<Footer/>
-</footer>
--->
+

@@ -4,7 +4,6 @@
     Tabs, TabItem,
     Drawer,
     Button,
-    CloseButton,
     Progressbar
   } from 'flowbite-svelte';
 
@@ -15,10 +14,11 @@
   } from 'flowbite-svelte-icons';
 
   import SiderBarItemCustom from "$lib/components/SideBar/SiderBarItemCustom.svelte";
+  import {userCurrentProgress} from '$lib/stores'
 
   let hiddenMobile = true; // State for Drawer visibility on mobile
   let mobilePlatform = false;
-  let hiddenNormal = false; // State for Drawer visibility on larger screens
+  let hiddenNormal = true; // State for Drawer visibility on larger screens
   let progressBarShow = true;
 
   let transitionParams = {
@@ -38,8 +38,6 @@
 
 <!-- Drawer: Visible only on small screens -->
 
-
-
 <Drawer
   transitionType="fly"
   {transitionParams}
@@ -52,13 +50,13 @@
 
     <TabItem title="Platforma" on:click={() => (mobilePlatform = true, progressBarShow = false)}>
 
-      <div slot="title" class="flex items-center gap-2">
+      <div slot="title" class="flex items-center gap-2 font-bold">
         <UserSolid size="md" />
         Platforma
       </div>
     </TabItem>
     <TabItem title="Edukacja" on:click={() => (mobilePlatform = false, progressBarShow = false)}>
-      <div slot="title" class="flex items-center gap-2">
+      <div slot="title" class="flex items-center gap-2 font-bold">
         <ClipboardSolid size="md" />
         Edukacja
       </div>
@@ -72,12 +70,13 @@
 
 
   <div hidden={progressBarShow} class="p-3 m-1 border rounded dark:border-gray-600">
-    <Progressbar progress="50" labelOutside="Progress" size="h-1.5" />
+    <Progressbar progress={userCurrentProgress.toString()} labelOutside="Progress" size="h-1.5" />
   </div>
 </Drawer>
 
 <!-- Normal Sidebar: Visible only on medium and larger screens -->
-<Sidebar asideClass="w-80 hidden md:block">
+<div class="static gray-text">
+<Sidebar asideClass="w-64 hidden h-full  md:block">
   <Tabs
     tabStyle="underline"
     class="flex items-center justify-center"
@@ -87,18 +86,19 @@
       title="Platforma"
       on:click={() => (hiddenNormal = false, progressBarShow = false)}
     >
-      <div slot="title" class="flex items-center gap-2">
+      <div slot="title" class="flex items-center gap-2 font-bold">
         <UserSolid size="md" />
         Platforma
       </div>
     </TabItem>
     <TabItem title="Edukacja" on:click={() => (hiddenNormal = true)}>
-      <div slot="title" class="flex items-center gap-2">
+      <div slot="title" class="flex items-center gap-2 font-bold">
         <ClipboardSolid size="md" />
         Edukacja
       </div>
     </TabItem>
   </Tabs>
+
 
   <Drawer
     width="80"
@@ -107,13 +107,20 @@
     transitionType="fly"
     {transitionParams}
     bind:hidden={hiddenNormal}
-    style="position: relative !important; max-height: 100vh; overflow-y: auto;"
-    class="custom-scrollbar h-screen"
+    style="position: relative !important; max-height: 75vh; overflow-y: auto;"
+    class="custom-scrollbar"
   >
     <SiderBarItemCustom />
-  </Drawer>
 
-  <div hidden={progressBarShow} class="p-3 m-1 border rounded dark:border-gray-600">
-    <Progressbar progress="50" labelOutside="Progress" size="h-1.5" />
-  </div>
+  </Drawer>
 </Sidebar>
+
+<div hidden={progressBarShow} class="p-2 border rounded dark:border-gray-600 w-50 relative bottom-14">
+  {#key $userCurrentProgress}
+  <Progressbar progress={$userCurrentProgress.toString()}  labelOutside="Progress" size="h-1.5"
+  precision={0}
+  />
+  {/key}
+</div>
+
+</div>

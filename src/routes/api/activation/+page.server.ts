@@ -9,7 +9,6 @@ export const load: PageServerLoad = async ({url }) => {
     const token = url.searchParams.get('token');
 
     if (!token) {
-        console.log("No Token")
         new Response(JSON.stringify({ message: 'Token is required' }), { status: 400 });
         throw redirect(303, '/error?code=400');
       }
