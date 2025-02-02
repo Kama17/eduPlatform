@@ -26,10 +26,15 @@ export const handle: Handle = async ({ event, resolve }) => {
             await db.session.delete({
                 where: { sessionToken },
             });
+
+            event.locals.user = undefined; // Explicitly set to null
         }
+    } else {
+        event.locals.user = undefined; // Explicitly set to null
     }
 
     // Protect certain routes
+    console.log("Current Path: ", event.url.pathname); // Debugging
     const protectedRoutes = ['/student'];
 
     if (protectedRoutes.includes(event.url.pathname) && !event.locals.user) {

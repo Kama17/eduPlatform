@@ -2,7 +2,8 @@ import { json } from '@sveltejs/kit';
 import db from '$lib/database';
 import { redirect } from '@sveltejs/kit';
 
-export const POST = async ({ cookies }) => {
+
+export const POST = async ({ cookies, locals }) => {
     const sessionToken = cookies.get('user_session');
 
     if (sessionToken) {
@@ -12,6 +13,8 @@ export const POST = async ({ cookies }) => {
 
         // Remove the cookie
         cookies.delete('user_session', { path: '/' });
+
+        locals.user = undefined
         throw redirect(303, '/');
 
     }

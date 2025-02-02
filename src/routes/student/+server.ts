@@ -4,6 +4,7 @@ import { type RequestHandler } from "@sveltejs/kit";
 
 export const POST: RequestHandler = async ({request, cookies} ) => {
  // Access the request object
+
   const { itemId, isChecked } = await request.json(); // Parse the JSON body
   const userId: number = Number(cookies.get('user'))
 
