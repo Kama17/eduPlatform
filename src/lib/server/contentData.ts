@@ -8,7 +8,8 @@ import step2 from '$lib/images/linkMT5/step2.jpg'
 import step3 from '$lib/images/linkMT5/step3.jpg'
 import mt5_download from '$lib/images/mt5.jpg'
 import mt5 from '$lib/images/MetaTrader_5.png'
-
+import solexxAccount from '$lib/images/solexx/solexxAccount.jpg'
+import solexxEdukatorzy from '$lib/images/solexx/solexxEdukatorzy.jpg'
 
 export const contentMap: {
     [key: string]: { title: string; type: string, content: string };
@@ -214,34 +215,76 @@ export const contentMap: {
       title: "Co to jest Solexx",
       type: "text",
       content: `
+      <p class="text-lg font-semibold mb-4 text-center">
+        Aplikacja SOLEXX
+      </p>
 
-  <p class="text-lg font-semibold mb-4 text-center">
-    Aplikację SOLEXX
+      <p class="text-sm mb-6">
+        Solexx to aplikacja stworzona przez Eaconomy, na której znajdziesz gotowe pomysły od naszych edukatorów,
+        linki do sesji LIVE, dodatkowe materiały oraz komentarze, które pomogą Ci w nauce i rozwoju.
+      </p>
+
+      <p class="text-lg font-semibold mb-4">Aplikacja jest dostępna w:</p>
+      <ul class="list-disc list-inside space-y-2 pl-4">
+        <li class="border-l-4 border-blue-500 pl-2">
+          <a href="https://play.google.com/store/apps/details?id=com.solexx&hl=pl"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700 font-medium">Google Play Store</a>
+        </li>
+        <li class="border-l-4 border-blue-500 pl-2">
+          <a href="https://apps.apple.com/pl/app/solexx/id6468769120"
+            target="_blank"
+            class="text-blue-500 hover:text-blue-700 font-medium">App Store</a>
+        </li>
+      </ul>
+
+      <p class="text-sm mt-6">
+        Po sciagniecju aplikacji zarejestruj sie uzywajac swojego e-maila.
+      </p>
+
+      <div class="flex justify-center mt-4">
+          <img src=${solexxAccount} alt="Step one" class="w-75 h-80 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+        </div>
+
+      <p class="mt-6 text-lg font-semibold text-green-500 text-center">
+        Pobierz teraz i zacznij korzystać z naszych zasobów edukacyjnych!
+      </p>
+      `
+    },
+    "startaplikacjasolexxedukatorzy": {
+      title: "Edukatorzy",
+      type: "text",
+      content: `
+      <p class="text-2xl font-bold mb-4 text-center">
+    Polecani edukatorzy
   </p>
 
   <p class="text-sm mb-6">
-    Solexx to aplikacja stworzona przez Eaconomy, na której znajdziesz gotowe pomysły od naszych edukatorów,
-    linki do sesji LIVE, dodatkowe materiały oraz komentarze, które pomogą Ci w nauce i rozwoju.
+    Po zainstalowaniu aplikacji <span class="font-semibold text-blue-500">SOLEXX</span>, warto rozpocząć od subskrypcji
+    rekomendowanych edukatorów. Dzięki temu będziesz otrzymywać powiadomienia o najnowszych sygnałach,
+    sesjach na żywo, webinarach i innych materiałach edukacyjnych.
+    Z czasem możesz odkrywać kolejnych ekspertów i stworzyć własną listę ulubionych edukatorów!
   </p>
 
-  <p class="text-lg font-semibold mb-4">Aplikacja jest dostępna w:</p>
-  <ul class="list-disc list-inside space-y-2 pl-4">
+    <div class="flex justify-center mt-4">
+      <img src=${solexxEdukatorzy} alt="Step one" class="w-75 h-80 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+    </div>
+
+  <p class="text-lg font-semibold mt-6 mb-4">Oto lista polecanych edukatorów na początek:</p>
+  <ul class="list-disc list-inside space-y-3 pl-4">
     <li class="border-l-4 border-blue-500 pl-2">
-      <a href="https://play.google.com/store/apps/details?id=com.solexx&hl=pl"
-         target="_blank"
-         class="text-blue-500 hover:text-blue-700 font-medium">Google Play Store</a>
+      <p class="text-blue-500 hover:text-blue-700 font-medium cursor-pointer">Kamil Wilk</p>
+      <p class="text-sm text-gray-500">Specjalista w analizie technicznej i zarządzaniu ryzykiem.</p>
     </li>
     <li class="border-l-4 border-blue-500 pl-2">
-      <a href="https://apps.apple.com/pl/app/solexx/id6468769120"
-         target="_blank"
-         class="text-blue-500 hover:text-blue-700 font-medium">App Store</a>
+      <p class="text-blue-500 hover:text-blue-700 font-medium cursor-pointer">Karolina Kuchnia Wilk</p>
+      <p class="text-sm text-gray-500">Ekspertka od strategii tradingowych i psychologii inwestora.</p>
     </li>
   </ul>
 
-  <p class="mt-6 text-lg font-semibold text-green-500">
-    Pobierz teraz i zacznij korzystać z naszych zasobów edukacyjnych!
+  <p class="mt-6 text-lg font-semibold text-center text-green-500">
+    Subskrybuj edukatorów i zacznij swoją przygodę z edukacją finansową!
   </p>
 
-      `
-    },
+      `},
   };
