@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-const JWT_SECRET = 'your-secret-key';
+const JWT_SECRET = String(process.env.JWT_SECRET)
 
 export const load: PageServerLoad = async ({url }) => {
 
