@@ -9,7 +9,7 @@
 
   import {
     AlignJustifyOutline,
-    UserSolid,
+    GlobeSolid,
     ClipboardSolid
   } from 'flowbite-svelte-icons';
 
@@ -51,7 +51,7 @@
     <TabItem title="Platforma" on:click={() => (mobilePlatform = true, progressBarShow = false)}>
 
       <div slot="title" class="flex items-center gap-2 font-bold">
-        <UserSolid size="md" />
+        <GlobeSolid size="md" />
         Platforma
       </div>
     </TabItem>
@@ -76,18 +76,18 @@
 
 <!-- Normal Sidebar: Visible only on medium and larger screens -->
 <div class="static gray-text">
-<Sidebar asideClass="w-64 hidden h-full  md:block">
+<Sidebar asideClass="w-64 hidden h-full md:block">
   <Tabs
     tabStyle="underline"
-    class="flex items-center justify-center"
-    contentClass="bg-gray-50 rounded-lg dark:bg-gray-800 mt-1"
+    class="flex items-center justify-center "
+    contentClass="bg-gray-50 rounded-lg dark:bg-gray-800"
   >
     <TabItem
       title="Platforma"
       on:click={() => (hiddenNormal = false, progressBarShow = false)}
     >
       <div slot="title" class="flex items-center gap-2 font-bold">
-        <UserSolid size="md" />
+        <GlobeSolid size="md" />
         Platforma
       </div>
     </TabItem>
@@ -108,14 +108,14 @@
     {transitionParams}
     bind:hidden={hiddenNormal}
     style="position: relative !important; max-height: 75vh; overflow-y: auto;"
-    class="custom-scrollbar"
+    class="custom-scrollbar rounded dark:bg-gray-900"
   >
     <SiderBarItemCustom />
 
   </Drawer>
 </Sidebar>
 
-<div hidden={progressBarShow} class="p-2 border rounded dark:border-gray-600 w-50 relative bottom-14">
+<div hidden={progressBarShow} class="p-2 border rounded dark:border-gray-400 w-50 relative bottom-14">
   {#key $userCurrentProgress}
   <Progressbar progress={$userCurrentProgress.toString()}  labelOutside="Progress" size="h-1.5"
   precision={0}

@@ -13,16 +13,16 @@ import {
   import {
     ChevronDoubleUpOutline,
     ChevronDoubleDownOutline,
-    ChevronUpOutline,ChevronDownOutline,
-    BookOpenSolid} from 'flowbite-svelte-icons';
+    ChevronUpOutline,
+    ChevronDownOutline,
+    UserSolid} from 'flowbite-svelte-icons';
 
   import { stepSlug, userCurrentProgress } from '$lib/stores'; // Import the store
   import {config} from '$lib/components/SideBar/config'
 
   let activeItemSlug: string = ''
   let userProgress: number = 0
-  let userProgressTotal: number = 0
-//
+
   const selectItem = (itemId: string) => {
     activeItemSlug = createSlug(itemId)
     stepSlug.set(activeItemSlug)
@@ -33,7 +33,6 @@ import {
   return text
     .toLowerCase()                           // Convert to lowercase
     .replace(/\s+/g, '')                     // Replace spaces with hyphens
-    //.replace(/[^\w\-]+/g, '')                 // Remove non-alphanumeric characters except hyphens
     .replace(/--+/g, '-')                     // Replace multiple hyphens with a single hyphen
     .replace(/^-+/, '')                       // Remove leading hyphens
     .replace(/-+$/, '');                      // Remove trailing hyphens
@@ -83,8 +82,6 @@ let checkboxes = writable<{ [key: string]: boolean }>({});
 
   }
 
-
-
   console.log( "PROGRESS:"  ,$userCurrentProgress)
 </script>
 
@@ -93,7 +90,7 @@ let checkboxes = writable<{ [key: string]: boolean }>({});
 <SidebarGroup class={levelDetails.Config.groupBorderClass}>
   <SidebarDropdownWrapper label={level} btnClass=" dark:text-gray-400 {levelDetails.Config.buttonClass}">
     <svelte:fragment slot="icon">
-      <BookOpenSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+      <UserSolid color={levelDetails.Config.iconColor} class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
     </svelte:fragment>
     <svelte:fragment slot="arrowup">
       <ChevronDoubleUpOutline />

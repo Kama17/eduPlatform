@@ -5,10 +5,9 @@
 
 </script>
 
-<Navbar class="dark:bg-gray-700 py-0">
+<Navbar class="dark:bg-gray-900 py-0">
 	<NavBrand href="/">
-	  <img src={logo} class="me-3 h-6 sm:h-9" alt="Learn2TradePro Logo" />
-	  <span class="">Learn 2 Trade Pro</span>
+	  <span class="text-lg font-bold">Learn 2 Trade Pro</span>
 	</NavBrand>
 	<NavHamburger />
 	<NavUl>

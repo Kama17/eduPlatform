@@ -1,6 +1,6 @@
 export const config: {
     [level: string]: {
-      Config: { buttonClass: string; groupBorderClass: string, checkBoxColor: string; }; // Top-level Config for each level
+      Config: { buttonClass: string; groupBorderClass: string, checkBoxColor: string, iconColor: string }; // Top-level Config for each level
       topics: {
         [topic: string]: {
           Config: { buttonClassOnClick: string, buttonClass: string; topicBorderClass: string }; // Config for each topic
@@ -11,40 +11,40 @@ export const config: {
   } = {
     "Start": {
       Config: { buttonClass: "flex items-center p-2 w-full text-sm font-bold rounded  transition duration-75 group hover:bg-gray-100 dark:hover:bg-blue-400 hover:dark:text-white",
-                groupBorderClass: "rounded m-2 dark:border-blue-400 ", checkBoxColor: "dark:text-gray-400  pe-3 cursor-pointer" },
+                groupBorderClass: "rounded m-2 dark:border-blue-400 ", checkBoxColor: "dark:text-gray-400  pe-3 cursor-pointer", iconColor: "rgb(118, 169, 250)" },
       topics: {
         "Witaj": {
-          Config: { buttonClassOnClick: "dark:bg-blue-400 dark:text-white", buttonClass: "hover:dark:bg-blue-400 hover:dark:text-white", topicBorderClass: "pt-1 mt-1 dark:border-blue-400" },
+          Config: { buttonClassOnClick: "dark:bg-blue-400 dark:text-white", buttonClass: "hover:dark:bg-blue-400 hover:dark:text-white font-bold ", topicBorderClass: "pt-1 mt-1 dark:border-blue-400" },
           steps: [
             { steps: ["Video"] },
           ],
         },
         "Konto brokerskie": {
-          Config: { buttonClassOnClick: "dark:bg-blue-400 dark:text-white", buttonClass: "hover:dark:bg-blue-400 hover:dark:text-white", topicBorderClass: "pt-1 mt-1 dark:border-blue-400" },
+          Config: { buttonClassOnClick: "dark:bg-blue-400 dark:text-white", buttonClass: "hover:dark:bg-blue-400 hover:dark:text-white font-bold", topicBorderClass: "pt-1 mt-1 dark:border-blue-400" },
           steps: [
             { steps: ["Co to jest konto blokerskie", "Założenie konta brokerskiego"] }
           ],
         },
-        "Program MeteTrader": {
-          Config: { buttonClassOnClick: "dark:bg-blue-400 dark:text-white", buttonClass: "hover:dark:bg-blue-400", topicBorderClass: "pt-1 mt-1 dark:border-blue-400" },
+        "Program MeteTrader5": {
+          Config: { buttonClassOnClick: "dark:bg-blue-400 dark:text-white", buttonClass: "hover:dark:bg-blue-400 hover:dark:text-white font-bold", topicBorderClass: "pt-1 mt-1 dark:border-blue-400" },
           steps: [
             { steps: ["Co to jest MetaTrader", "Instalacja MT5", "Połączenie MT5 z kontem brokerskim"] }
           ],
         },
         "Aplikacja Solexx": {
-          Config: { buttonClassOnClick: "dark:bg-blue-400 dark:text-white", buttonClass: "hover:dark:bg-blue-400 hover:dark:text-white", topicBorderClass: "pt-1 mt-1 dark:border-blue-400" },
+          Config: { buttonClassOnClick: "dark:bg-blue-400 dark:text-white", buttonClass: "hover:dark:bg-blue-400 hover:dark:text-white font-bold", topicBorderClass: "pt-1 mt-1 dark:border-blue-400" },
           steps: [
-            { steps: ["Co to jest Solexx", "Instalacja", "Kogo sledzic"] }
+            { steps: ["Co to jest Solexx", "Edukatorzy"] }
           ],
         },
       },
     },
     "Początkujący": {
       Config: { buttonClass: "flex items-center p-2 w-full text-sm font-bold dark:text-gray-400 rounded transition duration-75 group hover:bg-gray-100 dark:hover:bg-green-700 hover:dark:text-white",
-                groupBorderClass: " rounded m-2 dark:border-green-700", checkBoxColor: "green" },
+                groupBorderClass: " rounded m-2 dark:border-green-700", checkBoxColor: "green", iconColor: "rgb(4, 108, 78)" },
       topics: {
         "Sygnały": {
-          Config: { buttonClassOnClick: "dark:bg-green-700 dark:text-white", buttonClass: "hover:bg-green-700 hover:dark:text-white", topicBorderClass: "pt-1 mt-1 dark:border-green-700" },
+          Config: { buttonClassOnClick: "dark:bg-green-700 dark:text-white", buttonClass: "hover:bg-green-700 hover:dark:text-white font-bold", topicBorderClass: "pt-1 mt-1 dark:border-green-700" },
           steps: [
             { steps: ["Co to jest sygnał"] }
           ],

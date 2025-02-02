@@ -1,6 +1,5 @@
 <script lang="ts">
-	import SiderBarItemCustom from "$lib/components/SideBar/SiderBarItemCustom.svelte";
-	import { Video , Heading, P, A, List, Li } from 'flowbite-svelte'
+	import { Heading } from 'flowbite-svelte'
 </script>
 
 <svelte:head>

@@ -1,4 +1,14 @@
 import formularz  from '$lib/images/formularz.jpg'
+import potwierdzenie from '$lib/images/potwierdzenie.jpg'
+import potwierdzenie2 from '$lib/images/potwierdzenie2.jpg'
+import werywikacja from '$lib/images/werifikacja.jpg'
+import werywikacja2 from '$lib/images/werifikacja2.jpg'
+import step1 from '$lib/images/linkMT5/step1.jpg'
+import step2 from '$lib/images/linkMT5/step2.jpg'
+import step3 from '$lib/images/linkMT5/step3.jpg'
+import mt5_download from '$lib/images/mt5.jpg'
+import mt5 from '$lib/images/MetaTrader_5.png'
+
 
 export const contentMap: {
     [key: string]: { title: string; type: string, content: string };
@@ -7,7 +17,6 @@ export const contentMap: {
       title: "Wybór i Rejestracja u Brokera",
       type: "text",
       content: `
-   <div class="dark:text-gray-400 bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md max-w-3xl mx-auto">
   <h2 class="mt-6 font-semibold text-xl text-center text-gray-900 dark:text-gray-100">
     KROK 1 - KONTO BROKERSKIE (broker)
   </h2>
@@ -43,7 +52,7 @@ export const contentMap: {
 
   <!-- Formularz Rejestracyjny Image -->
   <div class="flex justify-center mt-4">
-    <img src=${formularz} alt="Formularz Rejestracyjny" class="w-48 h-80 rounded-md shadow-md">
+    <img src=${formularz} alt="Formularz Rejestracyjny" class="w-56 h-65 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
   </div>
 
   <!-- Krok 3 -->
@@ -52,8 +61,22 @@ export const contentMap: {
   </h3>
 
   <p class="mt-3 leading-relaxed">
-    Po wypełnieniu formularza otrzymasz e-mail z linkiem aktywacyjnym. Kliknij w link, aby potwierdzić swój adres e-mail i aktywować konto.
+    Po wypełnieniu formularza otrzymasz e-mail z kodem aktywacijnym.
   </p>
+
+    <!-- Potwierdzenie Image -->
+  <div class="flex justify-center mt-4">
+    <img src=${potwierdzenie} alt="Potwierdzenie rejestracji" class="w-56 h-65 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+  </div>
+
+    <p class="mt-3 leading-relaxed">
+    Wpisz kod na stronie aby potwierdzić swój adres e-mail i aktywować konto.
+  </p>
+
+      <!-- Potwierdzenie2 Image -->
+  <div class="flex justify-center mt-4">
+    <img src=${potwierdzenie2} alt="Potwierdzenie rejestracji" class="w-56 h-65 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+  </div>
 
   <!-- Krok 4 -->
   <h3 class="mt-6 font-semibold text-xl text-center text-gray-900 dark:text-gray-100">
@@ -69,6 +92,15 @@ export const contentMap: {
     Po pomyślnym zaakceptowaniu Twoich danych, Twój poziom weryfikacji zmieni się z <strong>LEVEL 0</strong> na <strong>LEVEL 1</strong>.
   </p>
 
+  <!-- werifikacja Image -->
+  <div class="flex justify-center mt-4 gap-2">
+    <img src=${werywikacja} alt="Potwierdzenie rejestracji"
+       class="zoomable w-56 h-65 rounded-md shadow-md pr-1 transition-transform duration-300 cursor-zoom-in">
+
+    <img src=${werywikacja2} alt="Potwierdzenie rejestracji"
+       class="zoomable w-56 h-65 rounded-md shadow-md transition-transform duration-300 cursor-zoom-in">
+  </div>
+
   <!-- Krok 5 -->
   <h3 class="mt-6 font-semibold text-xl text-center text-gray-900 dark:text-gray-100">
     KROK 5 - TWOJE KONTO DEMO JEST GOTOWE
@@ -81,8 +113,6 @@ export const contentMap: {
   <div class="mt-6 p-4 border-l-4 border-yellow-400 bg-yellow-100 text-gray-800 font-medium dark:bg-yellow-700 dark:text-gray-100">
     <strong>‼️ WAŻNE:</strong> Twój login i hasło do MT5 będą Ci potrzebne, dlatego zachowaj tę wiadomość e-mail.
   </div>
-</div>
-
       `
     },
     "startkontobrokerskiecotojestkontoblokerskie": {
@@ -90,35 +120,35 @@ export const contentMap: {
       type: "video",
       content: "/Content/konto_brokerskie.MP4"
     },
-    "startprogrammetetradercotojestmetatrader": {
-      title: "Co to jest MetaTrader",
+    "startprogrammetetrader5cotojestmetatrader": {
+      title: "Co to jest MetaTrader5",
       type: "text",
       content: `
-     <div class="dark:text-gray-400 bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md max-w-2xl mx-auto">
-  <p class="text-lg font-semibold mb-4">
-    MetaTrader 5 (MT5) – Najpopularniejsza platforma transakcyjna
-  </p>
 
-  <p class="leading-relaxed">
-    <span class="font-medium">MetaTrader 5 (MT5)</span> to jedna z najpopularniejszych platform transakcyjnych na świecie, umożliwiająca handel na rynku
-    <span class="text-blue-600 dark:text-blue-400 font-medium">Forex</span>, kontraktach
-    <span class="text-blue-600 dark:text-blue-400 font-medium">CFD</span> i innych instrumentach finansowych.
-  </p>
+    <div class="flex justify-center mt-4 pb-2">
+        <img src=${mt5} alt="Step one" class="w-75 h-80 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+    </div>
+    <p class="text-lg font-semibold mb-4 text-center">
+        MetaTrader 5 (MT5) – Najpopularniejsza platforma transakcyjna
+    </p>
 
-  <p class="mt-3 leading-relaxed">
-    Jest szeroko stosowana przez brokerów ze względu na swoją <span class="font-medium">niezawodność</span>, szeroką funkcjonalność oraz zgodność z wieloma systemami handlowymi.
-    Dzięki temu traderzy mogą korzystać z jednej platformy niezależnie od wybranego brokera, co zwiększa <span class="font-medium">wygodę</span> i <span class="font-medium">elastyczność</span>.
-  </p>
-</div>
+    <p class="leading-relaxed">
+      <span class="font-medium">MetaTrader 5 (MT5)</span> to jedna z najpopularniejszych platform transakcyjnych na świecie, umożliwiająca handel na rynku
+      <span class="text-blue-600 dark:text-blue-400 font-medium">Forex</span>, kontraktach
+      <span class="text-blue-600 dark:text-blue-400 font-medium">CFD</span> i innych instrumentach finansowych.
+    </p>
 
+    <p class="mt-3 leading-relaxed">
+      Jest szeroko stosowana przez brokerów ze względu na swoją <span class="font-medium">niezawodność</span>, szeroką funkcjonalność oraz zgodność z wieloma systemami handlowymi.
+      Dzięki temu traderzy mogą korzystać z jednej platformy niezależnie od wybranego brokera, co zwiększa <span class="font-medium">wygodę</span> i <span class="font-medium">elastyczność</span>.
+    </p>
        `
     },
-    "startprogrammetetraderinstalacjamt5": {
+    "startprogrammetetrader5instalacjamt5": {
       title: "Instalacja MT5",
       type: "text",
       content: `
-    <div class="dark:text-gray-400 bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md max-w-2xl mx-auto">
-  <p class="text-lg font-semibold mb-4">
+  <p class="text-lg font-semibold mb-4 text-center">
     Aby pobrać i zainstalować MetaTrader 5, wykonaj następujące kroki:
   </p>
 
@@ -138,36 +168,80 @@ export const contentMap: {
       Po zakończeniu instalacji uruchom aplikację <span class="font-medium">MT5</span>.
     </li>
   </ol>
-</div>
 
+    <div class="flex justify-center mt-4 pb-2">
+        <img src=${mt5_download} alt="Step one" class="w-75 h-80 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+    </div>
   `
     },
-    "startprogrammetetraderpołączeniemt5zkontembrokerskim": {
+    "startprogrammetetrader5połączeniemt5zkontembrokerskim": {
       title: "Połączenie konta brokerskiego z MT5",
       type: "text",
       content: `
-<div class="dark:text-gray-400 bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md max-w-2xl mx-auto">
-  <p class="text-lg font-semibold mb-4">
+  <p class="text-lg font-semibold mb-4 text-center">
     Po zainstalowaniu MetaTrader 5 należy połączyć swoje konto brokerskie:
   </p>
 
   <ol class="list-decimal list-inside space-y-2 pl-4">
     <li class="border-l-4 border-blue-500 pl-2">Otwórz aplikację MT5.</li>
-    <li class="border-l-4 border-blue-500 pl-2">Wybierz opcję <span class="font-medium">"Plik" → "Otwórz rachunek"</span>.</li>
-    <li class="border-l-4 border-blue-500 pl-2">Wybierz odpowiedni serwer brokera (otrzymany w e-mailu od brokera) i kliknij <span class="font-medium">"OK"</span>. Jeśli serwer nie pojawia się na liście, spróbuj wpisać go ręcznie lub kliknij <span class="font-medium">"Dodaj nowy broker"</span>.</li>
-    <li class="border-l-4 border-blue-500 pl-2">Wybierz <span class="font-medium">"Połącz się z istniejącym rachunkiem handlowym"</span>.</li>
+    <li class="border-l-4 border-blue-500 pl-2">Wybierz opcję <span class="font-medium">"Plik" → "Otwórz rachunek"</span>.
+        <div class="flex justify-center mt-4">
+          <img src=${step1} alt="Step one" class="w-75 h-80 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+        </div>
+    </li>
+    <li class="border-l-4 border-blue-500 pl-2">Wybierz odpowiedni serwer brokera (otrzymany w e-mailu od brokera) i kliknij <span class="font-medium">"OK"</span>. Jeśli serwer nie pojawia się na liście, spróbuj wpisać go ręcznie lub kliknij <span class="font-medium">"Dodaj nowy broker"</span>.
+       <div class="flex justify-center mt-4">
+          <img src=${step2} alt="Step one" class="w-75 h-80 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+        </div>
+    </li>
+    <li class="border-l-4 border-blue-500 pl-2">Wybierz <span class="font-medium">"Połącz się z istniejącym rachunkiem handlowym"</span>.
+       <div class="flex justify-center mt-4">
+          <img src=${step3} alt="Step one" class="w-75 h-80 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+        </div>
+    </li>
     <li class="border-l-4 border-blue-500 pl-2">Wprowadź dane logowania (login, hasło i serwer) otrzymane w e-mailu od brokera.</li>
     <li class="border-l-4 border-blue-500 pl-2">
       Jeśli połączenie zostało ustanowione poprawnie, zobaczysz swoje saldo oraz możliwość składania zleceń. Jeśli połączenie nie powiodło się, sprawdź poprawność danych logowania i nazwę serwera.
     </li>
   </ol>
 
-  <p class="mt-6 text-lg font-semibold text-green-500">
+  <p class="mt-6 text-lg font-semibold text-green-500 text-center">
     Teraz jesteś gotowy do rozpoczęcia nauki i handlu na rynku Forex!
   </p>
-</div>
-
-
   `
-    }
+    },
+    "startaplikacjasolexxcotojestsolexx": {
+      title: "Co to jest Solexx",
+      type: "text",
+      content: `
+
+  <p class="text-lg font-semibold mb-4 text-center">
+    Aplikację SOLEXX
+  </p>
+
+  <p class="text-sm mb-6">
+    Solexx to aplikacja stworzona przez Eaconomy, na której znajdziesz gotowe pomysły od naszych edukatorów,
+    linki do sesji LIVE, dodatkowe materiały oraz komentarze, które pomogą Ci w nauce i rozwoju.
+  </p>
+
+  <p class="text-lg font-semibold mb-4">Aplikacja jest dostępna w:</p>
+  <ul class="list-disc list-inside space-y-2 pl-4">
+    <li class="border-l-4 border-blue-500 pl-2">
+      <a href="https://play.google.com/store/apps/details?id=com.solexx&hl=pl"
+         target="_blank"
+         class="text-blue-500 hover:text-blue-700 font-medium">Google Play Store</a>
+    </li>
+    <li class="border-l-4 border-blue-500 pl-2">
+      <a href="https://apps.apple.com/pl/app/solexx/id6468769120"
+         target="_blank"
+         class="text-blue-500 hover:text-blue-700 font-medium">App Store</a>
+    </li>
+  </ul>
+
+  <p class="mt-6 text-lg font-semibold text-green-500">
+    Pobierz teraz i zacznij korzystać z naszych zasobów edukacyjnych!
+  </p>
+
+      `
+    },
   };

@@ -38,14 +38,6 @@ export const POST: RequestHandler = async ({ request }) => {
                 },
               });
         }
-        // Create a new user
-        //await db.user.create({
-            //data: {
-               // email: email,
-               // password: password,
-               // active: 'yes',
-           // },
-        //});
 
         const userActivated = await db.user.findUnique({
             where: {email : email}
