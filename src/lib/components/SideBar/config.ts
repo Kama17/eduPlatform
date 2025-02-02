@@ -114,3 +114,24 @@ export const config: {
     },
   };
 */
+
+export const getTotalStepsForAllLevels = () => {
+  let totalSteps = 0;
+
+  // Iterate through each level
+  for (const level in config) {
+    const topics = config[level].topics;
+
+    // Iterate through each topic in the level
+    for (const topic in topics) {
+      const stepsArray = topics[topic].steps;
+
+      // Sum the steps for each topic
+      for (const step of stepsArray) {
+        totalSteps += step.steps.length;
+      }
+    }
+  }
+
+  return totalSteps;
+};

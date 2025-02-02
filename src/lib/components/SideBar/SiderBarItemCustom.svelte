@@ -18,15 +18,16 @@ import {
     UserSolid} from 'flowbite-svelte-icons';
 
   import { stepSlug, userCurrentProgress } from '$lib/stores'; // Import the store
-  import {config} from '$lib/components/SideBar/config'
+  import {config, getTotalStepsForAllLevels} from '$lib/components/SideBar/config'
+
 
   let activeItemSlug: string = ''
   let userProgress: number = 0
+  let totalProgress: number = getTotalStepsForAllLevels()
 
   const selectItem = (itemId: string) => {
     activeItemSlug = createSlug(itemId)
     stepSlug.set(activeItemSlug)
-    console.log(activeItemSlug)
   }
 
   function createSlug(text: string): string {
@@ -59,10 +60,7 @@ let checkboxes = writable<{ [key: string]: boolean }>({});
 
   // Set the formatted data to the checkboxes store
   checkboxes.set(formattedData);
-  $userCurrentProgress = Math.ceil( (userProgress/6) * 100)
-  console.log(userProgress)
-
-
+  $userCurrentProgress = Math.ceil( (userProgress/totalProgress) * 100)
   });
 
   // Update checkbox state in the database
@@ -78,11 +76,9 @@ let checkboxes = writable<{ [key: string]: boolean }>({});
     else
       userProgress--
 
-      $userCurrentProgress = Math.ceil( (userProgress/6) * 100)
-
+      $userCurrentProgress = Math.ceil( (userProgress/totalProgress) * 100)
   }
 
-  console.log( "PROGRESS:"  ,$userCurrentProgress)
 </script>
 
 {#each Object.entries(config) as [level, levelDetails]}

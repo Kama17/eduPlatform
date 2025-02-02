@@ -17,7 +17,7 @@
     {#if $page.data.user}
 	<form method="POST" action="/logout">
 		<button type="submit">
-			<NavLi>Log out</NavLi>
+			<NavLi>Wyloguj</NavLi>
 		</button>
 	</form>
 	<NavLi href="/faq">FAQ</NavLi>

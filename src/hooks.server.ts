@@ -34,7 +34,6 @@ export const handle: Handle = async ({ event, resolve }) => {
     }
 
     // Protect certain routes
-    console.log("Current Path: ", event.url.pathname); // Debugging
     const protectedRoutes = ['/student'];
 
     if (protectedRoutes.includes(event.url.pathname) && !event.locals.user) {
