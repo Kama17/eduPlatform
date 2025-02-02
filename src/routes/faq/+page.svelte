@@ -1,5 +1,56 @@
 <script lang="ts">
+import { onMount } from "svelte";
 import { Section, Faq, FaqItem } from "flowbite-svelte-blocks";
+import noweKonto from '$lib/images/faq/noweKonto.jpg'
+
+onMount(() => {
+  // Handle zoom click
+  function handleClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target || !target.classList.contains("zoomable")) return;
+
+    // Get current zoom level or start at 1
+    let zoomLevel = parseFloat(target.dataset.zoom || "1");
+
+    if (!target.classList.contains("zoomed")) {
+      zoomLevel = 2; // Start zoom at 200%
+    } else {
+      zoomLevel += 0.5; // Increase zoom on each click
+      if (zoomLevel > 4) zoomLevel = 1; // Reset zoom if too big
+    }
+
+    target.dataset.zoom = zoomLevel.toString(); // Store zoom level
+
+    // Apply zoom transformation
+    if (zoomLevel > 1) {
+      target.classList.add("zoomed", "cursor-zoom-out");
+      target.style.transform = `translate(-50%, -50%) scale(${zoomLevel})`;
+    } else {
+      target.classList.remove("zoomed", "cursor-zoom-out");
+      target.style.transform = "";
+    }
+  }
+
+  // Handle outside click to reset zoom
+  function handleOutsideClick(event: MouseEvent) {
+    const zoomedImage = document.querySelector(".zoomed") as HTMLElement;
+    if (zoomedImage && !zoomedImage.contains(event.target as Node)) {
+      zoomedImage.classList.remove("zoomed", "cursor-zoom-out");
+      zoomedImage.style.transform = "";
+      zoomedImage.dataset.zoom = "1"; // Reset zoom level
+    }
+  }
+
+  // Attach event listeners
+  document.addEventListener("click", handleClick);
+  document.addEventListener("click", handleOutsideClick, true);
+
+  return () => {
+    document.removeEventListener("click", handleClick);
+    document.removeEventListener("click", handleOutsideClick, true);
+  };
+});
+
 </script>
 
 <Section name="faq">
@@ -7,8 +58,11 @@ import { Section, Faq, FaqItem } from "flowbite-svelte-blocks";
   <Faq>
     <div>
       <FaqItem>
-        <svelte:fragment slot="h3">What do you mean by "Figma assets"?</svelte:fragment>
-        <p class="text-gray-500 dark:text-gray-400">You will have access to download the full Figma project including all of the pages, the components, responsive pages, and also the icons, illustrations, and images included in the screens.</p>
+        <svelte:fragment slot="h3">Jak założyć nowe konto na Quo Markets?</svelte:fragment>
+        <p class="text-gray-500 dark:text-gray-400"></p>
+        <div class="flex justify-center mt-4">
+          <img src={noweKonto} alt="Step one" class="w-75 h-80 rounded-md shadow-md zoomable transition-transform duration-300 cursor-zoom-in">
+        </div>
       </FaqItem>
       <FaqItem>
         <svelte:fragment slot="h3">What does "lifetime access" exactly mean?</svelte:fragment>

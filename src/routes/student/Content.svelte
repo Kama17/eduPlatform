@@ -2,8 +2,7 @@
 import { onMount } from "svelte";
 
 import { stepSlug } from '$lib/stores';
-import { CodeBranchOutline } from 'flowbite-svelte-icons';
-import { Video , Heading, P } from 'flowbite-svelte'
+import { Video , P } from 'flowbite-svelte'
 
 let contentText: string;
 let title: string;

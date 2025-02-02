@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { Button, ImagePlaceholder,Footer, FooterLinkGroup, FooterLink, Tooltip, Modal, Label, Input, Textarea } from 'flowbite-svelte'
-	import { Section, ArticleAuthor, ArticleBody, ArticleHead, ArticleWrapper, BlogHead, BlogBodyWrapper } from 'flowbite-svelte-blocks';
-	import { VideoCameraSolid, ArrowRightOutline, NewspaperSolid } from 'flowbite-svelte-icons';
+	import { Button, Footer, FooterLinkGroup, FooterLink, Tooltip, Modal, Label, Input, Textarea } from 'flowbite-svelte'
+	import { Section } from 'flowbite-svelte-blocks';
 	import me from '$lib/images/me.jpg'
-
 
 	let formModal = false;
 
