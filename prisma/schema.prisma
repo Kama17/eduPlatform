@@ -60,14 +60,16 @@ model telegramGroups {
   isActive Boolean @default(false)
   chatId   BigInt
   chatName String?
-  bot      bot     @relation(fields: [chatId], references: [chatId])
+  bot      bot     @relation(fields: [chatId], references: [chatId], onDelete: Cascade)
   user     User    @relation(fields: [userId], references: [id])
+
+  @@unique([chatId, userId])
 }
 
 model bot {
   id             Int              @id @default(autoincrement())
   chatId         BigInt           @unique
   chatName       String?
-  isMember       Boolean          @default(false)
+  isActive       Boolean          @default(false)
   telegramGroups telegramGroups[]
 }
