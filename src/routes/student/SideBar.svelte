@@ -10,24 +10,39 @@
   import {
     AlignJustifyOutline,
     GlobeSolid,
-    ClipboardSolid
+    ClipboardSolid,
+
+	CodeBranchOutline
+
   } from 'flowbite-svelte-icons';
 
-  import SiderBarItemCustom from "$lib/components/SideBar/SiderBarItemCustom.svelte";
+  import SideBarPlatform from "$lib/components/SideBar/SideBarPlatform.svelte";
+  import SideBarEdu from "$lib/components/SideBar/SideBarEdu.svelte";
+
   import {userCurrentProgress} from '$lib/stores'
+	import { tick } from 'svelte';
+	import { fly } from 'svelte/transition';
+
 
   let hiddenMobile = true; // State for Drawer visibility on mobile
   let mobilePlatform = false;
-  let hiddenNormal = true; // State for Drawer visibility on larger screens
+  let hiddenSideBarPlatform = true; // State for Drawer visibility on larger screens
+  let hiddenSideBarEdu = true; // State for Drawer visibility on larger screens
   let progressBarShow = true;
 
-  let transitionParams = {
+  let transitionParamsPlatform = {
     x: -320,
-    duration: 200,
+    duration: 500,
   };
+
+  let showPlatformTest = false;
+  const toggleDrawers = async (showPlatform: boolean) => {
+      showPlatformTest = showPlatform;
+};
+
 </script>
 
-<!-- Hamburger Button: Visible only on small screens -->
+<!-- Hamburger Button: Visible only on small screens
 <Button
   on:click={() => (hiddenMobile = false)}
   pill={true}
@@ -36,11 +51,11 @@
   <AlignJustifyOutline />
 </Button>
 
-<!-- Drawer: Visible only on small screens -->
+Drawer: Visible only on small screens
 
 <Drawer
   transitionType="fly"
-  {transitionParams}
+  transitionParams = {transitionParamsPlatform}
   bind:hidden={hiddenMobile}
   class="custom-scrollbar">
   <Tabs
@@ -55,7 +70,7 @@
         Platforma
       </div>
     </TabItem>
-    <TabItem title="Edukacja" on:click={() => (mobilePlatform = false, progressBarShow = false)}>
+    <TabItem title="Edukacja" on:click={() => (mobilePlatform = true, progressBarShow = false)}>
       <div slot="title" class="flex items-center gap-2 font-bold">
         <ClipboardSolid size="md" />
         Edukacja
@@ -65,7 +80,7 @@
 
 
     {#if mobilePlatform}
-      <SiderBarItemCustom />
+      <SideBarPlatform />
     {/if}
 
 
@@ -73,6 +88,8 @@
     <Progressbar progress={userCurrentProgress.toString()} labelOutside="Progress" size="h-1.5" />
   </div>
 </Drawer>
+
+-->
 
 <!-- Normal Sidebar: Visible only on medium and larger screens -->
 <div class="static gray-text">
@@ -84,14 +101,16 @@
   >
     <TabItem
       title="Platforma"
-      on:click={() => (hiddenNormal = false, progressBarShow = false)}
+      on:click={() => toggleDrawers(true)}
     >
       <div slot="title" class="flex items-center gap-2 font-bold">
         <GlobeSolid size="md" />
         Platforma
       </div>
     </TabItem>
-    <TabItem title="Edukacja" on:click={() => (hiddenNormal = true)}>
+    <TabItem title="Edukacja"
+    on:click={() => toggleDrawers(false)}
+      >
       <div slot="title" class="flex items-center gap-2 font-bold">
         <ClipboardSolid size="md" />
         Edukacja
@@ -100,19 +119,60 @@
   </Tabs>
 
 
+  {#if showPlatformTest}
+	<div
+		transition:fly="{transitionParamsPlatform}"
+		on:introstart={()=>{hiddenSideBarEdu = true}}
+		on:introend={async ()=>{
+      await tick()
+      hiddenSideBarPlatform = false}}
+	>
+
+  {#if !hiddenSideBarPlatform}
   <Drawer
-    width="80"
-    backdrop={false}
-    activateClickOutside={false}
-    transitionType="fly"
-    {transitionParams}
-    bind:hidden={hiddenNormal}
-    style="position: relative !important; max-height: 75vh; overflow-y: auto;"
-    class="custom-scrollbar rounded dark:bg-gray-900"
-  >
-    <SiderBarItemCustom />
+  width="80"
+  backdrop={false}
+  activateClickOutside={false}
+  transitionType="fly"
+  transitionParams = {transitionParamsPlatform}
+  bind:hidden={hiddenSideBarPlatform}
+  style="position: relative !important; max-height: 75vh; overflow-y: auto;"
+  class="custom-scrollbar rounded dark:bg-gray-900"
+>
+
+<SideBarPlatform />
 
   </Drawer>
+{/if}
+</div>
+{/if}
+
+{#if !showPlatformTest}
+<div
+transition:fly={transitionParamsPlatform}
+on:introstart={()=>hiddenSideBarPlatform = true}
+on:introend={ async ()=>{
+    await tick();
+    hiddenSideBarEdu = false}}
+>
+
+{#if !hiddenSideBarEdu}
+<Drawer
+width="80"
+backdrop={false}
+activateClickOutside={false}
+transitionType="fly"
+transitionParams = {transitionParamsPlatform}
+bind:hidden={hiddenSideBarEdu}
+style="position: relative !important; max-height: 75vh; overflow-y: auto;"
+class="custom-scrollbar rounded dark:bg-gray-900"
+>
+<SideBarEdu />
+</Drawer>
+{/if}
+</div>
+{/if}
+
 </Sidebar>
 
 <div hidden={progressBarShow} class="p-2 border rounded dark:border-gray-400 w-50 relative bottom-14">

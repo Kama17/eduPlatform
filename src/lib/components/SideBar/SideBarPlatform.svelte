@@ -18,12 +18,11 @@ import {
     UserSolid} from 'flowbite-svelte-icons';
 
   import { stepSlug, userCurrentProgress } from '$lib/stores'; // Import the store
-  import {config, getTotalStepsForAllLevels} from '$lib/components/SideBar/config'
-
+  import {configPlatform, getTotalStepsForAllLevelsPlatform} from '$lib/components/SideBar/configPlatform'
 
   let activeItemSlug: string = ''
   let userProgress: number = 0
-  let totalProgress: number = getTotalStepsForAllLevels()
+  let totalProgress: number = getTotalStepsForAllLevelsPlatform()
 
   const selectItem = (itemId: string) => {
     activeItemSlug = createSlug(itemId)
@@ -81,7 +80,7 @@ let checkboxes = writable<{ [key: string]: boolean }>({});
 
 </script>
 
-{#each Object.entries(config) as [level, levelDetails]}
+{#each Object.entries(configPlatform) as [level, levelDetails]}
 
 <SidebarGroup class={levelDetails.Config.groupBorderClass}>
   <SidebarDropdownWrapper label={level} btnClass=" dark:text-gray-400 {levelDetails.Config.buttonClass}">
