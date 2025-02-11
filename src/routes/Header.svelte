@@ -7,14 +7,12 @@
 
 <Navbar class="dark:bg-gray-900 py-0">
 	<NavBrand href="/">
-	  <span class="text-lg font-bold">Learn 2 Trade Pro</span>
+	  <span class="text-xl font-bold p-3">Learn 2 Trade Pro</span>
 	</NavBrand>
 	<NavHamburger />
 	<NavUl>
-	  <NavLi href="/">Home</NavLi>
-	  <NavLi href="/about">About</NavLi>
-	  <NavLi href="/student">Centrun Studenta</NavLi>
     {#if $page.data.user}
+	<NavLi href="/student">Centrun Studenta</NavLi>
 	<form method="POST" action="/logout">
 		<button type="submit">
 			<NavLi>Wyloguj</NavLi>
